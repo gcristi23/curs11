@@ -1,6 +1,9 @@
 var buttons = $('button');
 var playerSpan = $('#player');
 var winnerDiv = $('#winner');
+var resetDiv = $('#reset');
+
+resetDiv.hide();
 
 var moves = 0;
 var winner;
@@ -22,6 +25,7 @@ var clickHandler = (event) => {
 
     if (winner) {
         winnerDiv.html("Winner: " + winner);
+        resetDiv.show();
     }
     player = player === "X" ? "O" : "X";
     playerSpan.html(player);
