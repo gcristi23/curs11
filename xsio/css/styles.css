@@ -32,6 +32,12 @@ button {
     background-color:gray;
 }
 
+#reset {
+    background-color: red;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .X {
     background-color: blue;
     box-shadow: 0px 0px 5px 5px blue;
