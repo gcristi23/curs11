@@ -23,21 +23,9 @@ var clickHandler = (event) => {
     if (target.html())
         return;
 
-    moves++;
-    target.addClass(player);
-    target.html(player);
-    winner = checkWinner();
-
-    if (winner) {
-        if(winner!="DRAW") {
-            scores[winner]++;
-            printScores();
-        }
-        winnerDiv.html("Winner: " + winner);
-        resetDiv.show();
+    if(moveButton(target)) {
+        return;
     }
-    player = player === "X" ? "O" : "X";
-    playerSpan.html(player);
     botMove();
 }
 
@@ -71,9 +59,34 @@ var checkWinner = () => {
 var botMove = () => {
     var move = Math.floor(Math.random()*9);
     var botButton = $(buttons[move]);
-    botButton.html("bot");
-    console.log(botButton);
 
+    while (botButton.html()) {
+        move = Math.floor(Math.random()*9);
+        botButton = $(buttons[move]);
+    }
+    if(moveButton(botButton)) {
+        return;
+    }
+}
+
+
+var moveButton = (button) => {
+    moves++;
+    button.addClass(player);
+    button.html(player);
+    winner = checkWinner();
+
+    if (winner) {
+        if(winner!="DRAW") {
+            scores[winner]++;
+            printScores();
+        }
+        winnerDiv.html("Winner: " + winner);
+        resetDiv.show();
+        return true;
+    }
+    player = player === "X" ? "O" : "X";
+    playerSpan.html(player);
 }
 
 
