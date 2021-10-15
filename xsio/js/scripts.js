@@ -38,6 +38,7 @@ var clickHandler = (event) => {
     }
     player = player === "X" ? "O" : "X";
     playerSpan.html(player);
+    botMove();
 }
 
 var checkWinner = () => {
@@ -67,7 +68,13 @@ var checkWinner = () => {
 
 }
 
+var botMove = () => {
+    var move = Math.floor(Math.random()*9);
+    var botButton = $(buttons[move]);
+    botButton.html("bot");
+    console.log(botButton);
 
+}
 
 
 var resetGame = () => {
