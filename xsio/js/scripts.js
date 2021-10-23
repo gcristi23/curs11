@@ -3,13 +3,15 @@ var playerSpan = $('#player');
 var winnerDiv = $('#winner');
 var resetDiv = $('#reset');
 var scoreDiv = $('#game-score');
+var newGameDiv = $('#new-game');
+var playBotCheckbox = $('#play-bot');
 
-
-resetDiv.hide();
 
 var scores = { "X": 0, "O": 0 };
 var moves = 0;
-var winner;
+var winner = "N";
+var playBot;
+
 var player = Math.random() < 0.5 ? "X" : "O";
 playerSpan.html(player);
 
@@ -26,7 +28,10 @@ var clickHandler = (event) => {
     if(moveButton(target)) {
         return;
     }
-    botMove();
+
+    if(playBot) {
+        botMove();
+    }
 }
 
 var checkWinner = () => {
@@ -82,7 +87,7 @@ var moveButton = (button) => {
             printScores();
         }
         winnerDiv.html("Winner: " + winner);
-        resetDiv.show();
+        newGameDiv.show();
         return true;
     }
     player = player === "X" ? "O" : "X";
@@ -91,10 +96,11 @@ var moveButton = (button) => {
 
 
 var resetGame = () => {
+    playBot = playBotCheckbox.is(":checked");
     winner = null;
     winnerDiv.html("");
     moves = 0;
-    resetDiv.hide();
+    newGameDiv.hide();
     player = Math.random() < 0.5 ? "X" : "O";
     playerSpan.html(player);
     buttons.each(function () {
